@@ -12,6 +12,13 @@ const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
+//解决路由跳转多次点击报错 重写replace方法
+const VueRouterReplace = VueRouter.prototype.replace
+VueRouter.prototype.replace = function replace (to) {
+  return VueRouterReplace.call(this, to).catch(err => err)
+}
+
+
 
 //1.安装插件
 Vue.use(VueRouter)
